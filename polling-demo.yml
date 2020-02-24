@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "hello-world"
+---
+apiVersion: apps/v1 
+kind: Deployment
+metadata: 
+  name: hello-world-go
+  namespace: hello-world 
+  labels: 
+      name: "hello-world"
+  annotations:
+      keel.sh/pollSchedule: "@every 1m"
+      keel.sh/policy: "regexp:^([0-9a-f]+)$"
+      keel.sh/trigger: poll
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "hello-world-go"
+  template:
+    metadata:
+      name: hello-world
+      labels:
+        app: hello-world-go
+    spec:
+      containers:
+        - image: richarddoggo/hello-world-go:947a6cab51d87ea325a054be26ff6ed86fcc016b # this would start repository digest checks
+          imagePullPolicy: Always 
+          name: hello-world-go
+          command: ["/server"]
+          ports:
+            - containerPort: 8080       
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+          securityContext:
+            privileged: true
