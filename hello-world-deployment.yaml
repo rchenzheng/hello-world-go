@@ -1,21 +1,10 @@
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: "hello-world"
----
 apiVersion: apps/v1 
 kind: Deployment
 metadata: 
   name: hello-world-go
-  namespace: hello-world 
   labels: 
       name: "hello-world"
-  annotations:
-      keel.sh/pollSchedule: "@every 1m"
-      keel.sh/policy: all
-      keel.sh/trigger: poll
-      keel.sh/notify: keel-test
 
 spec:
   replicas: 1

@@ -4,7 +4,6 @@ metadata:
   name: hello-world
   labels:
     app: hello-world-go 
-  namespace: hello-world 
 spec:
   clusterIP: None
   ports:
