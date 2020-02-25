@@ -13,8 +13,9 @@ metadata:
       name: "hello-world"
   annotations:
       keel.sh/pollSchedule: "@every 1m"
-      keel.sh/policy: "regexp:^([0-9a-f]+)$"
+      keel.sh/policy: all
       keel.sh/trigger: poll
+      keel.sh/notify: keel-test
 
 spec:
   replicas: 1
@@ -28,7 +29,7 @@ spec:
         app: hello-world-go
     spec:
       containers:
-        - image: richarddoggo/hello-world-go:947a6cab51d87ea325a054be26ff6ed86fcc016b # this would start repository digest checks
+        - image: richarddoggo/hello-world-go:0.0.1 # this would start repository digest checks
           imagePullPolicy: Always 
           name: hello-world-go
           command: ["/server"]
