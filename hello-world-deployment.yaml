@@ -18,7 +18,7 @@ spec:
         app: hello-world-go
     spec:
       containers:
-        - image: richarddoggo/hello-world-go:test # this would start repository digest checks
+        - image: richarddoggo/hello-world-go:0.0.3 # this would start repository digest checks
           imagePullPolicy: Always 
           name: hello-world-go
           command: ["/server"]
