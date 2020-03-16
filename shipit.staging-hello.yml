@@ -4,6 +4,7 @@ dependencies:
 deploy: &deploy
   pre:
     - git clone --quiet --depth=1 --single-branch git@github.com:scoremedia/thescore-shipit-scripts scripts/shipit
+    - export project="scorebet-staging"
   override:
     - ./scripts/shipit/scripts/deploy.sh
   post: []
@@ -16,7 +17,6 @@ review:
 
 machine:
   environment:
-    project: scorebet-staging
     DEPLOY_VIA: kubernetes
     KUBERNETES_NAMESPACE: hello-world 
     PLATFORM: gke
