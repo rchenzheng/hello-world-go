@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hello-world
+  labels:
+    project: hello-world
+    app: hello-world-go 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world
+  namespace: hello-world
+  labels:
+    project: hello-world
+    app: hello-world-go 
+spec:
+  clusterIP: None
+  ports:
+  - port: 8080 
+    name: endpoint
+  selector:
+    app: hello-world-go 
+    environment: <%= environment %>
+---
+apiVersion: apps/v1 
+kind: Deployment
+metadata: 
+  name: hello-world-go
+  labels: 
+      name: "hello-world"
+      environment: <%= environment %>
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: hello-world
+      app: hello-world-go
+  template:
+    metadata:
+      name: hello-world
+      labels:
+        app: hello-world-go 
+        environment: <%= environment %>
+    spec:
+      containers:
+        - image: <%= image %>
+          imagePullPolicy: Always 
+          name: hello-world-go
+          command: ["/server"]
+          ports:
+            - containerPort: 8080       
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+          securityContext:
+            privileged: true

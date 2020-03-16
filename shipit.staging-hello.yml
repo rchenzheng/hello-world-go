@@ -1,0 +1,27 @@
+dependencies:
+  override: []
+
+deploy: &deploy
+  pre:
+    - git clone --quiet --depth=1 --single-branch git@github.com:scoremedia/thescore-shipit-scripts scripts/shipit
+    - ./bin/shipit-tasks/slack-deploy-message.sh pre
+  override:
+    - ./scripts/shipit/scripts/deploy.sh
+  post:
+    - ./bin/shipit-tasks/slack-deploy-message.sh post
+
+rollback:
+  <<: *deploy
+
+review:
+  checklist: []
+
+machine:
+  environment:
+    DEPLOY_VIA: kubernetes
+    KUBERNETES_NAMESPACE: hello-world 
+    PLATFORM: gke
+    KUBERNETES_CLUSTER: scorebet-staging
+    KUBERNETES_CLUSTER_REGION: us-central1
+    REGISTRY_REPO_NAME: hello-world-go  
+    ORGANIZATION: scorebet
