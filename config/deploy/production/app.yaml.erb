@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
   name: hello-world
   labels:
-    project: hello-world
     app: hello-world-go 
+    environment: <%= environment %>
 ---
 apiVersion: v1
 kind: Service
@@ -12,30 +12,30 @@ metadata:
   name: hello-world
   namespace: hello-world
   labels:
-    project: hello-world
-    app: hello-world-go 
+  app: hello-world-go-shipit
+  environment: <%= environment %>
 spec:
   clusterIP: None
   ports:
   - port: 8080 
     name: endpoint
   selector:
-    app: hello-world-go 
+    app: hello-world-go-shipit
     environment: <%= environment %>
 ---
 apiVersion: apps/v1 
 kind: Deployment
 metadata: 
-  name: hello-world-go
+  name: hello-world-shipit
   labels: 
-      name: "hello-world"
-      environment: <%= environment %>
+    app: hello-world-go-shipit
+    environment: <%= environment %>
 spec:
   replicas: 1
   selector:
     matchLabels:
-      project: hello-world
-      app: hello-world-go
+      app: hello-world-go-shipit
+      environment: <%= environment %>
   template:
     metadata:
       name: hello-world
