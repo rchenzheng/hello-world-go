@@ -16,7 +16,6 @@ review:
 
 machine:
   environment:
-    ENVIRONMENT: staging
     GCP_PROJECT: scorebet-staging
     DEPLOY_VIA: kubernetes
     KUBERNETES_NAMESPACE: hello-world 
