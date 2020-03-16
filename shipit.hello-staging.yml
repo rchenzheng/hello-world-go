@@ -5,7 +5,7 @@ deploy: &deploy
   pre:
     - git clone --quiet --depth=1 --single-branch git@github.com:scoremedia/thescore-shipit-scripts scripts/shipit
   override:
-    - ./scripts/shipit/scripts/deploy.sh
+    - GCP_PROJECT=scorebet-staging ./scripts/shipit/scripts/deploy.sh
   post: []
 
 rollback:
@@ -16,7 +16,6 @@ review:
 
 machine:
   environment:
-    GCP_PROJECT: scorebet-staging
     DEPLOY_VIA: kubernetes
     KUBERNETES_NAMESPACE: hello-world 
     PLATFORM: gke
