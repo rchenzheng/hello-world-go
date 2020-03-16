@@ -48,6 +48,9 @@ spec:
           imagePullPolicy: Always 
           name: hello-world-go
           command: ["/server"]
+          envFrom:
+          - secretRef:
+              name: hello-world
           ports:
             - containerPort: 8080       
           livenessProbe:
