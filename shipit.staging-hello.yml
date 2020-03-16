@@ -4,11 +4,9 @@ dependencies:
 deploy: &deploy
   pre:
     - git clone --quiet --depth=1 --single-branch git@github.com:scoremedia/thescore-shipit-scripts scripts/shipit
-    - ./bin/shipit-tasks/slack-deploy-message.sh pre
   override:
     - ./scripts/shipit/scripts/deploy.sh
-  post:
-    - ./bin/shipit-tasks/slack-deploy-message.sh post
+  post: []
 
 rollback:
   <<: *deploy
