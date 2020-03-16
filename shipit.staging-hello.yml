@@ -4,8 +4,8 @@ dependencies:
 deploy: &deploy
   pre:
     - git clone --quiet --depth=1 --single-branch git@github.com:scoremedia/thescore-shipit-scripts scripts/shipit
-    - export project="scorebet-staging"
   override:
+    - export project="scorebet-staging"
     - ./scripts/shipit/scripts/deploy.sh
   post: []
 
