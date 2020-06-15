@@ -11,8 +11,7 @@ kind: Service
 metadata:
   name: hello-world
   labels:
-    app: hello-world-go
-  namespace: hello-world 
+    app: hello-world-go 
 spec:
   clusterIP: None
   ports:
@@ -29,7 +28,6 @@ metadata:
   name: hello-world-go
   labels: 
       name: "hello-world"
-  namespace: hello-world 
 
 spec:
   replicas: 1
