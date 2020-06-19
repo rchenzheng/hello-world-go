@@ -34,6 +34,7 @@ spec:
         role: test
         environment: <%= environment %>
     spec:
+      serviceAccountName: hello-secrets 
       containers:
         - image: richarddoggo/hello-world-go:0.0.3 # this would start repository digest checks
           imagePullPolicy: Always 
@@ -49,3 +50,11 @@ spec:
             timeoutSeconds: 10
           securityContext:
             privileged: true
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: hello-secrets
+  labels:
+    app: hello-world-go 
+    environment: <%= environment %>
