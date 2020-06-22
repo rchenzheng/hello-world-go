@@ -22,8 +22,8 @@ metadata:
       name: "hello-world"
   annotations:
     vault.hashicorp.com/agent-inject: "true"
-    vault.hashicorp.com/agent-inject-secret-hello-world: secret/hello-world
-    vault.hashicorp.com/role: hello-world
+    vault.hashicorp.com/agent-inject-secret-hello-world: "secret/hello-world"
+    vault.hashicorp.com/role: "hello-world"
 spec:
   replicas: 1
   selector:
