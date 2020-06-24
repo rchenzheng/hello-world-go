@@ -34,14 +34,13 @@ spec:
         environment: <%= environment %>
       annotations:
         vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/agent-inject-status: "update"
         vault.hashicorp.com/agent-inject-secret-hello-world: "secret/hello-world"
         vault.hashicorp.com/role: "hello-world"
         vault.hashicorp.com/agent-inject-template-hello-world: |
-          {{- with secret "secret/data/hello-world" -}}
-          api-token: {{ .Data.api-token }}
-          user: {{ .Data.user }}
-          password: {{ .Data.password }}
+          {{- with secret "secret/hello-world" -}}
+          api-token: {{ index .Data.data "api-token" }}
+          user: {{ .Data.data.user }}
+          password: {{ .Data.data.password }}
           {{- end }}
     spec:
       serviceAccountName: hello-secrets 
