@@ -20,11 +20,6 @@ metadata:
   name: hello-world-go
   labels: 
       name: "hello-world"
-  annotations:
-    vault.hashicorp.com/agent-inject: "true"
-    vault.hashicorp.com/agent-inject-status: "update"
-    vault.hashicorp.com/agent-inject-secret-hello-world: "secret/hello-world"
-    vault.hashicorp.com/role: "hello-world"
 spec:
   replicas: 1
   selector:
@@ -37,6 +32,11 @@ spec:
         app: hello-world-go
         role: test
         environment: <%= environment %>
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/agent-inject-status: "update"
+        vault.hashicorp.com/agent-inject-secret-hello-world: "secret/hello-world"
+        vault.hashicorp.com/role: "hello-world"
     spec:
       serviceAccountName: hello-secrets 
       containers:
