@@ -38,9 +38,9 @@ spec:
         vault.hashicorp.com/role: "hello-world"
         vault.hashicorp.com/agent-inject-template-hello-world: |
           {{- with secret "secret/hello-world" -}}
-          api-token: {{ index .Data.data "api-token" }}
-          user: {{ .Data.data.user }}
-          password: {{ .Data.data.password }}
+          api-token={{ index .Data.data "api-token" }}
+          user={{ .Data.data.user }}
+          password={{ .Data.data.password }}
           {{- end }}
     spec:
       serviceAccountName: hello-secrets 
