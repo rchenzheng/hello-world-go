@@ -12,8 +12,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
   target := os.Getenv("TARGET")
   if target == "" {
     target = "World"
-  }
-  fmt.Fprintf(w, "Hello %s Developer!\n", target)
+	}
+	
+	h, err := os.Hostname()
+	if err != nil{
+		fmt.Println(err)
+	}
+
+  fmt.Fprintf(w, "Hello %s Developer at %s \n", target, h)
 }
 
 func main() {
