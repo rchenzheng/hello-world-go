@@ -1,0 +1,14 @@
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hello-world
+  namespace: hello-world
+spec:
+  maxReplicas: 10
+  minReplicas: 5
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hello-world-go 
+  targetCPUUtilizationPercentage: 20
